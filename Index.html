@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Father's Day, Dad!</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #cbebff 100%); /* Light blue gradient background */
+            min-height: 100vh;
+            padding: 40px 20px; /* Increased vertical padding to ensure content isn't flush with top/bottom */
+            position: relative; /* Needed for absolute positioning of corner decorations */
+            margin: 0; /* Remove default body margin */
+            overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 40px 30px;
+            z-index: 10; /* Ensure card is above corner decorations */
+            position: relative; /* To contain any elements that might need to be relative to the card */
+            margin: 0 auto; /* Center the card horizontally */
+        }
+        .header-icon {
+            font-size: 4.5rem; /* Slightly larger icon */
+            margin-bottom: 25px;
+            color: #4f46e5; /* Indigo color for icon */
+            animation: bounceIn 1s ease-out; /* Add a subtle bounce animation */
+        }
+        .main-heading {
+            font-size: 3rem; /* Slightly larger heading */
+            font-weight: 700;
+            color: #1e3a8a; /* Darker blue */
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1); /* Subtle text shadow */
+        }
+        .sub-heading {
+            font-size: 1.6rem; /* Slightly larger sub-heading */
+            font-weight: 600;
+            color: #3b82f6; /* Blue */
+            margin-bottom: 30px;
+        }
+        .message-text {
+            font-size: 1.2rem; /* Slightly larger text */
+            color: #4a5568; /* Grayish text */
+            line-height: 1.8;
+            margin-bottom: 35px;
+            max-width: 650px; /* Wider text area */
+        }
+        .signature {
+            font-size: 1.3rem; /* Slightly larger signature */
+            font-weight: 600;
+            color: #4f46e5; /* Indigo */
+            margin-top: 25px;
+        }
+        .quote-box {
+            background-color: #e0f2fe; /* Light blue background for quote */
+            border-left: 5px solid #2563eb; /* Darker blue border */
+            padding: 25px; /* More padding */
+            border-radius: 12px; /* Slightly more rounded */
+            margin-top: 35px;
+            font-style: italic;
+            color: #1e40af; /* Dark blue text */
+            font-size: 1.1rem; /* Slightly larger quote text */
+            text-align: left;
+            width: 100%;
+            max-width: 550px; /* Wider quote box */
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05); /* Subtle shadow for quote box */
+        }
+        .quote-author {
+            margin-top: 15px;
+            font-weight: 600;
+            text-align: right;
+            color: #2563eb;
+        }
+
+        /* Corner Decorations (Balloons & Flowers) */
+        .corner-decoration {
+            position: absolute;
+            font-size: 3.5rem; /* Adjust size of emojis */
+            opacity: 0.8; /* Slightly less transparent */
+            z-index: 5; /* Below the main card */
+        }
+
+        .top-left {
+            top: 20px;
+            left: 20px;
+            transform: rotate(-15deg); /* Slight rotation for a playful look */
+        }
+        .top-right {
+            top: 20px;
+            right: 20px;
+            transform: rotate(15deg);
+        }
+        .bottom-left {
+            bottom: 20px;
+            left: 20px;
+            transform: rotate(15deg);
+        }
+        .bottom-right {
+            bottom: 20px;
+            right: 20px;
+            transform: rotate(-15deg);
+        }
+
+        /* Additional Decorations (Confetti & Stars) */
+        .extra-decoration {
+            position: absolute;
+            font-size: 2.2rem; /* Size for extra emojis */
+            opacity: 0.4; /* More transparent for background effect */
+            z-index: 2; /* Further back than corner decorations */
+            pointer-events: none; /* Ensure they don't block interaction */
+            animation: floatEffect 8s infinite ease-in-out; /* Floating animation */
+        }
+
+        /* Individual animation delays for varied movement */
+        .extra-decoration:nth-child(1) { animation-delay: 0s; }
+        .extra-decoration:nth-child(2) { animation-delay: 1.5s; }
+        .extra-decoration:nth-child(3) { animation-delay: 3s; }
+        .extra-decoration:nth-child(4) { animation-delay: 4.5s; }
+        .extra-decoration:nth-child(5) { animation-delay: 6s; }
+        .extra-decoration:nth-child(6) { animation-delay: 7.5s; }
+
+
+        /* Positions for extra decorations */
+        .confetti-1 { top: 10%; left: 10%; transform: rotate(30deg); }
+        .star-1 { top: 25%; right: 5%; transform: rotate(-45deg); }
+        .confetti-2 { bottom: 20%; left: 5%; transform: rotate(-20deg); }
+        .star-2 { bottom: 10%; right: 15%; transform: rotate(60deg); }
+        .confetti-3 { top: 5%; right: 20%; transform: rotate(10deg); }
+        .star-3 { top: 40%; left: 2%; transform: rotate(80deg); }
+
+        /* Keyframe animations */
+        @keyframes floatEffect {
+            0% { transform: translateY(0px) rotate(var(--initial-rotation, 0deg)); }
+            50% { transform: translateY(-20px) rotate(calc(var(--initial-rotation, 0deg) + 10deg)); }
+            100% { transform: translateY(0px) rotate(var(--initial-rotation, 0deg)); }
+        }
+
+        /* Set initial rotation for floatEffect */
+        .confetti-1 { --initial-rotation: 30deg; }
+        .star-1 { --initial-rotation: -45deg; }
+        .confetti-2 { --initial-rotation: -20deg; }
+        .star-2 { --initial-rotation: 60deg; }
+        .confetti-3 { --initial-rotation: 10deg; }
+        .star-3 { --initial-rotation: 80deg; }
+
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+            0% { opacity: 0; transform: scale3d(.3, .3, .3); }
+            20% { transform: scale3d(1.1, 1.1, 1.1); }
+            40% { transform: scale3d(.9, .9, .9); }
+            60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
+            80% { transform: scale3d(.97, .97, .97); }
+            100% { opacity: 1; transform: scale3d(1, 1, 1); }
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-heading {
+                font-size: 2.2rem;
+            }
+            .sub-heading {
+                font-size: 1.3rem;
+            }
+            .message-text {
+                font-size: 1.05rem;
+            }
+            .header-icon {
+                font-size: 3.5rem;
+            }
+            .card {
+                padding: 30px 20px;
+            }
+            .corner-decoration {
+                font-size: 2.5rem; /* Smaller emojis on smaller screens */
+                top: 15px; /* Adjust position */
+                left: 15px;
+                right: 15px;
+                bottom: 15px;
+            }
+            .extra-decoration {
+                font-size: 1.8rem; /* Smaller extra emojis on smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Corner Decorations -->
+    <div class="corner-decoration top-left">🎈🌸</div>
+    <div class="corner-decoration top-right">🌸🎈</div>
+    <div class="corner-decoration bottom-left">🎈🌸</div>
+    <div class="corner-decoration bottom-right">🌸🎈</div>
+
+    <!-- Additional Decorations -->
+    <div class="extra-decoration confetti-1">🎉</div>
+    <div class="extra-decoration star-1">✨</div>
+    <div class="extra-decoration confetti-2">🎊</div>
+    <div class="extra-decoration star-2">🌟</div>
+    <div class="extra-decoration confetti-3">🎉</div>
+    <div class="extra-decoration star-3">⭐</div>
+
+    <div class="card">
+        <!-- Icon (using a simple emoji for visual appeal) -->
+        <div class="header-icon" role="img" aria-label="Father and child icon">👨‍👧‍👦</div>
+
+        <h1 class="main-heading">Happy Father's Day, Dad!</h1>
+        <h2 class="sub-heading">To the best dad in the world!</h2>
+      <img src="1000002303.png" alt="A lovely picture of my dad and me" class="w-full max-w-sm md:max-w-md rounded-lg shadow-lg mx-auto my-6 border-4 border-blue-200">
+
+        <p class="message-text">
+            Dear Dad, on this special day, I want to express my deepest gratitude for everything you do. Your strength, wisdom, patience, and unwavering support have shaped me into the person I am today. You've always been my guiding light, my biggest cheerleader, and my safest harbor.
+            Thank you for every laugh, every lesson, and every moment we've shared. You've taught me so much, not just through your words, but through your actions and the incredible example you set.
+            I'm incredibly lucky to have you. I love you more than words can say.
+        </p>
+
+        <div class="quote-box">
+            "A father is neither an anchor to hold us back, nor a sail to take us there, but a guiding light whose love shows us the way."
+            <div class="quote-author">- A wise man</div>
+        </div>
+
+        <p class="signature">With all my love,</p>
+        <p class="signature">Your Son, Piyush</p>
+        <!-- Remember to replace [Son/Daughter/Child's Name] with your actual name! -->
+    </div>
+</body>
+</html>
